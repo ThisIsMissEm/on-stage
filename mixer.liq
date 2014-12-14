@@ -56,10 +56,9 @@ add_source("s3", "testing")
 add_source("s4", "testing")
 
 
-def list.indexOf(value, list)
+def list.indexOf(value, thelist)
   found = false
-  index = 0
-  list.iter(fun(cur) -> begin
+  index = list.fold(fun(index, cur) -> begin
     if found == false then
       index = index + 1
     end
@@ -67,7 +66,9 @@ def list.indexOf(value, list)
     if cur == value then
       found = true
     end
-  end)
+  end, 0, thelist)
+
+  log(string_of(index))
 
   index
 end
