@@ -16,12 +16,18 @@ function makeCallback(maybe){
   }
 };
 
-function parseCb(data, callback){
+function JSONParse(data, callback){
+  var error = null;
   try {
-    res = JSON.parse(res);
-    callback(null, res)
+    parsed = JSON.parse(data);
   }catch(e){
-    callback(e);
+    error = e;
+  }
+
+  if(error){
+    callback(error);
+  }else {
+    callback(null, parsed)
   }
 }
 
@@ -53,7 +59,7 @@ function Client(path){
     if(res.substr(0, 6) === "ERROR:"){
       callback(new Error(res.slice(6)));
     } else {
-      parseCb(res, callback)
+      JSONParse(res, callback)
     }
   });
 
