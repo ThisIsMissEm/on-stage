@@ -110,7 +110,7 @@ end
 
 def crossfade(a,b)
   if is_replay_metadata(a) or is_replay_metadata(b) then
-    add(id="add_replay", [ fade.final(a), fade.initial(b) ])
+    add(id="add_replay", [ b ])
   # Try to match further:
   elsif is_default(a) and not is_default(b) then
     add(id="add_in", normalize=false, [
