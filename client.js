@@ -30,7 +30,7 @@ function Client(path){
       return;
     }
 
-    var cb = client.callbacks.unshift();
+    var cb = client.callbacks.shift();
     var res = buffer.splice(0, buffer.length).join("");
 
     if(cb && cb != noop){
