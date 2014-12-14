@@ -24,11 +24,10 @@ active_source = ref 0
 
 def counter()
   int = ref 0
-  def next()
+  fun() ->
     current = !int
     int := !int + 1
     current
-  end
 end
 
 source_counter = counter()
