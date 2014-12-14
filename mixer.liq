@@ -31,10 +31,12 @@ def counter()
   end
 end
 
+dyn_counter = counter()
+stream_counter = counter()
 source_counter = counter()
 
 def add_dyn_source(~id, s)
-  dyn_source_id := !dyn_source_id + 1
+  # dyn_source_id := !dyn_source_id + 1
 
   dyn_sources := list.append(!dyn_sources, [ s ] )
   dyn_sources_names := list.append(!dyn_sources_names, [ id ] )
@@ -44,7 +46,7 @@ def add_dyn_source(~id, s)
 end
 
 def add_stream(uri)
-  ident = "s#{!dyn_source_id}_stream"
+  ident = "stream#{stream_counter()}"
   httpstream = input.http(id=ident, autostart=true, uri)
   ignore(add_dyn_source(id=ident, httpstream))
   ignore(ident)
