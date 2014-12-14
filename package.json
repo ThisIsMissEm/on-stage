@@ -1,0 +1,15 @@
+{
+  "name": "on-stage",
+  "version": "0.1.0",
+  "description": "On Stage: Mixing your streams",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Micheil Smith <micheil@brandedcode.com>",
+  "license": "MIT",
+  "dependencies": {
+    "byline": "^4.1.1"
+  },
+  "devDependencies": {}
+}
