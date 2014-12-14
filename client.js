@@ -82,6 +82,8 @@ Client.prototype._send = function(cmd){
   var callback = makeCallback(arguments[arguments.length - 1]);
   var args = Array.prototype.slice.call(arguments, 1, arguments.length - 1);
 
+  console.log(args);
+
   this.callbacks.push(callback);
 
   cmd = cmd.concat(args).join(" ") + "\r\n";
