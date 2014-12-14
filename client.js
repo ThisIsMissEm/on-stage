@@ -15,4 +15,14 @@ socket.setEncoding('utf8');
 var parser = new LineStream();
 socket.pipe(parser);
 
-parser.on('data', console.log)
+var buffer = [];
+
+parser.on('data', function(data){
+  if(data === "END"){
+    console.log(buffer.join(""))
+    buffer = [];
+    return;
+  }
+
+  buffer.push(data);
+})
