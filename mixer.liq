@@ -21,6 +21,13 @@ dyn_sources_names = ref []
 dyn_source_id = ref 0
 active_source = ref 0
 
+source_counter_int = ref 0
+def source_counter()
+  current = !source_counter_int
+  source_counter_int := !source_counter_int + 1
+  current
+end
+
 def add_dyn_source(~id, s)
   dyn_source_id := !dyn_source_id + 1
 
@@ -39,7 +46,7 @@ def add_stream(uri)
 end
 
 def add_source(mount, password)
-  ident = "s#{!dyn_source_id}_source"
+  ident = "source#{source_counter()}"
   harbor = input.harbor(id=ident, port=8080, password=password, mount)
   ignore(add_dyn_source(id=ident, harbor))
 end
@@ -103,7 +110,6 @@ def transition(name)
 end
 
 def dyn_names(_)
-  # list.fold(fun (a, b) -> string_concat(",", [a, b]), )
   json_of(!dyn_sources_names)
 end
 
