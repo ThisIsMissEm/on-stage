@@ -80,7 +80,14 @@ Client.prototype._send = function(cmd){
 };
 
 Client.prototype.list_streams = function(callback){
-  this._send("list_streams", callback);
+  this._send("list_streams", function(res) {
+    try {
+      res = JSON.parse(res);
+      callback(null, res)
+    }catch(e){
+      callback(e)
+    }
+  });
 };
 
 Client.prototype.count = function(callback){
