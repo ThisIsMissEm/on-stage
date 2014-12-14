@@ -18,7 +18,7 @@ set("harbor.reverse_dns", false)
 
 dyn_sources = ref []
 dyn_sources_names = ref []
-dyn_source_id = ref 0
+# dyn_source_id = ref 0
 active_source = ref 0
 
 
