@@ -80,13 +80,13 @@ Client.prototype._flushQueue = function() {
 
 Client.prototype._send = function(cmd){
   var callback = makeCallback(arguments[arguments.length - 1]);
-  var args = Array.prototype.slice.call(arguments, 1, arguments.length - 1);
+  var cmd = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
 
-  console.log(args);
+  console.log(cmd);
 
   this.callbacks.push(callback);
 
-  cmd = cmd.concat(args).join(" ") + "\r\n";
+  cmd = cmd.join(" ") + "\r\n";
 
   console.log("<< ", cmd);
 
