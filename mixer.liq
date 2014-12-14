@@ -1,4 +1,4 @@
-set("log.file.path","/tmp/<script>.log")
+set("log.file.path","/tmp/mixer.log")
 set("log.stdout", true)
 
 set("gstreamer.debug_level", 5)
@@ -10,7 +10,7 @@ set("scheduler.non_blocking_queues",10)
 
 # Socket control
 set("server.socket",true)
-set("server.socket.path","/tmp/liquidsoap-socket")
+set("server.socket.path","/tmp/liquidsoap-mixer")
 set("server.timeout",-1.0)
 
 set("harbor.bind_addr","0.0.0.0")
