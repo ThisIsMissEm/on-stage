@@ -1,8 +1,8 @@
 var path = require('path');
 var net = require('net');
 
-var EE = require('events').EventEmitter;
-var LS = require('byline').LineStream;
+var EventEmitter = require('events').EventEmitter;
+var LineStream = require('byline').LineStream;
 
 var inherits = require('util').inherits
 
