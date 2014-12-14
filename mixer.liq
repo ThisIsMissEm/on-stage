@@ -32,7 +32,7 @@ end
 stream_counter = counter()
 source_counter = counter()
 
-def add_stream(id, s)
+def add_stream(~id, s)
   streams := list.append(!streams, [ s ] )
   stream_names := list.append(!stream_names, [ id ] )
 
