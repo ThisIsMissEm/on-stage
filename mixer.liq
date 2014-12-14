@@ -23,7 +23,7 @@ stream_names = ref []
 active_source = ref 0
 
 def counter()
-  int = ref 0
+  int = ref 1
   fun() -> begin
     current = !int
     int := !int + 1
