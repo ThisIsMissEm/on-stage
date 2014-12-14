@@ -101,6 +101,9 @@ end, !dyn_sources)
 
 
 def crossfade(a,b)
+
+  log(json_of([source.id(a), source.id(b)]))
+
   if source.id(a) == "default" and source.id(b) != "default" then
     add(normalize=false, [
       fade.initial(b)
