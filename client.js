@@ -84,8 +84,7 @@ Client.prototype._send = function(cmd){
 
   this.callbacks.push(callback);
 
-  cmd += args.join(" ");
-  cmd += "\r\n";
+  cmd = cmd.concat(args).join(" ") + "\r\n";
 
   console.log("<< ", cmd);
 
@@ -105,7 +104,7 @@ Client.prototype.count = function(callback){
 };
 
 Client.prototype.transition = function(to, callback){
-  this._send('transition', to, callback);
+  this._send('transition', to.toString(), callback);
 };
 
 
