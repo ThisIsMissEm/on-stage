@@ -17,9 +17,7 @@ function Client(path){
 
   this.socket = net.createConnection({
     path: path
-  });
-
-  this.socket.on('connect', this._flushQueue.bind(this));
+  }, this._flushQueue.bind(this));
 
   this.socket.setEncoding('utf8');
 
@@ -48,6 +46,7 @@ function Client(path){
 module.exports = Client;
 
 Client.prototype._flushQueue = function() {
+  console.log('_flushQueue', this);
   var data;
   while(this.queue.length && (data = this.queue.shift() )){
     this.socket.write(data);
