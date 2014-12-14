@@ -56,9 +56,28 @@ add_source("s3", "testing")
 add_source("s4", "testing")
 
 
+def list.indexOf(value, list)
+  found = false
+  index = 0
+  list.iter(fun(cur) -> begin
+    if found == false
+      index = index + 1
+    end
 
-def transition(sInt)
-  index = int_of_string(sInt)
+    if cur == value
+      found = true
+    end
+  end)
+
+  index
+end
+
+
+def transition(name)
+  index = list.indexOf(name, !dyn_sources_names)
+  log("#{name} found at index: #{index}"
+
+  # index = int_of_string(sInt)
   len = list.length(!dyn_sources)
 
   if index >= 0 and index < len then
