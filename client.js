@@ -46,7 +46,7 @@ function Client(path){
 module.exports = Client;
 
 Client.prototype._flushQueue = function() {
-  console.log('_flushQueue', this);
+  console.log('_flushQueue');
   var data;
   while(this.queue.length && (data = this.queue.shift() )){
     this.socket.write(data);
