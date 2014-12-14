@@ -30,13 +30,13 @@ function Client(path){
       return;
     }
 
-    var cb = this.callbacks.unshift();
+    var cb = client.callbacks.unshift();
     var res = buffer.splice(0, buffer.length).join("");
 
-    if(cb == noop) {
-      console.log("UNHANDLED RES: ", res);
-    }else{
+    if(cb && cb != noop){
       cb(res);
+    }else{
+      console.log("UNHANDLED RES: ", res);
     }
   });
 
