@@ -101,7 +101,7 @@ end, !dyn_sources)
 
 
 def is_replay_metadata(stream)
-  string.match("replay_metadata_", source.id(stream))
+  string.match(pattern="replay_metadata_", source.id(stream))
 end
 
 def is_default(stream)
