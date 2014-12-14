@@ -56,17 +56,23 @@ add_source("s3", "testing")
 add_source("s4", "testing")
 
 
+
 def list.indexOf(value, thelist)
   found = false
-  index = list.fold(fun(index, cur) -> begin
-    if found == false then
-      index = index + 1
-    end
 
-    if cur == value then
+  def f(l,x) = 
+    if x == value then
       found = true
     end
-  end, 0, thelist)
+
+    if found then
+      l
+    else
+      l + 1
+    end
+  end
+
+  index = list.fold(f, 0, thelist)
 
   log(string_of(index))
 
