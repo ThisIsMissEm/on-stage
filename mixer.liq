@@ -100,17 +100,25 @@ sfs = list.map(fun (source) -> begin
 end, !dyn_sources)
 
 
+def is_replay_metadata(stream)
+  string.match("replay_metadata_", source.id(stream))
+end
+
+def is_default(stream)
+  source.id(stream) == "default"
+end
+
 def crossfade(a,b)
-
-  log(json_of([source.id(a), source.id(b)]))
-
-  if source.id(a) == "default" and source.id(b) != "default" then
+  if is_replay_metadata(a) or is_replay_metadata(b) then
+    add(id="add_replay", [ fade.final(a), fade.initial(b) ])
+  # Try to match further:
+  elsif is_default(a) and not is_default(b) then
     add(id="add_in", normalize=false, [
       fade.initial(b)
       # sequence(merge=true, [ fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ]),
       # sequence(merge=true, [ blank(duration=3.75), fade.initial(b) ])
     ])
-  elsif source.id(a) != "default" and source.id(b) == "default" then
+  elsif is_default(b) and not is_default(a) then
     add(id="add_out", normalize=false, [
       sequence(merge=true, [ fade.final(a, duration=2.0), default ])
       # sequence(merge=true, [ blank(duration=0.75), fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ])
