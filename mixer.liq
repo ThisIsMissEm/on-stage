@@ -111,8 +111,7 @@ end
 def crossfade(a,b)
   if is_replay_metadata(a) or is_replay_metadata(b) then
     log("Skip Replay s -> b")
-    b
-    # add(id="add_replay", [ sequence(merge=true, [ a, b ]) ])
+    add(id="add_replay", [ sequence(merge=true, [ fade.final(a), b ]) ])
   # Try to match further:
   elsif is_default(a) and not is_default(b) then
     log("Add In s -> _ -> b")
