@@ -69,7 +69,7 @@ def transition(sInt)
     active_source := index
     json_of("done")
   else
-    "Error: Could not transition to out-of-bounds stream"
+    "ERROR: Could not transition to out-of-bounds stream"
   end
 end
 
