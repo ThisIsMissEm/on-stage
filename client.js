@@ -6,7 +6,15 @@ var LineStream = require('byline').LineStream;
 
 var inherits = require('util').inherits
 
-function noop(){};
+function makeCallback(maybe){
+  if(typeof maybe === "function"){
+    return maybe;
+  }
+
+  return function(err){
+    if(err) throw err;
+  }
+};
 
 function Client(path){
   var client = this;
@@ -33,6 +41,8 @@ function Client(path){
     var cb = client.callbacks.shift();
     var res = buffer.splice(0, buffer.length).join("");
 
+    console.log(">> ", cmd);
+
     if(cb && cb != noop){
       cb(res);
     }else{
@@ -55,10 +65,16 @@ Client.prototype._flushQueue = function() {
   this.ready = true;
 };
 
-Client.prototype._send = function(cmd, callback){
-  this.callbacks.push(callback || noop);
+Client.prototype._send = function(cmd){
+  var callback = makeCallback(arguments[arguments.length - 1]);
+  var args = Array.prototype.slice.call(arguments, 1, arguments.length - 1);
 
+  this.callbacks.push(callback);
+
+  cmd += args.join(" ");
   cmd += "\r\n";
+
+  console.log("<< ", cmd);
 
   if(this.ready){
     this.socket.write(cmd);
@@ -69,6 +85,14 @@ Client.prototype._send = function(cmd, callback){
 
 Client.prototype.list_streams = function(callback){
   this._send("list_streams", callback);
+};
+
+Client.prototype.count = function(callback){
+  this._send('count', callback);
+};
+
+Client.prototype.transition = function(to, callback){
+  this._send('transition', to, callback);
 };
 
 
