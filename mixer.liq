@@ -40,7 +40,7 @@ def add_stream(~id, s)
   ignore(output.dummy(fallible=true, s))
 end
 
-def add_stream(uri)
+def add_http(uri)
   ident = "stream#{stream_counter()}"
   httpstream = input.http(id=ident, autostart=true, uri)
   ignore(add_stream(id=ident, httpstream))
@@ -58,7 +58,7 @@ jingle = single(id="jingle", conservative=true, default_duration=7.0, length=7.0
 default = amplify(id="default", 0.00001, noise())
 ignore(add_stream(id="default", default))
 
-add_stream("http://listen.ntslive.co.uk/stream")
+add_http("http://listen.ntslive.co.uk/stream")
 add_source("password 1")
 add_source("password 2")
 add_source("password 3")
