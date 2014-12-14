@@ -67,9 +67,9 @@ def transition(sInt)
     id = list.nth(!dyn_sources_names, index)
     log("streams.select(#{index}) => #{id}")
     active_source := index
-    "done"
+    json_of("done")
   else
-    "error"
+    "Error: Could not transition to out-of-bounds stream"
   end
 end
 
@@ -79,13 +79,13 @@ def dyn_names(_)
 end
 
 def dyn_count(_)
-  string_of(list.length(!dyn_sources))
+  json_of([ 'count', string_of(list.length(!dyn_sources)) ] )
 end
 
 
 def mute(_)
   active_source := 0
-  "done"
+  json_of("done")
 end
 
 server.register(description="Retrieve number of available streams", "count", dyn_count)
