@@ -59,7 +59,6 @@ add_source("s4", "testing")
 
 def list.indexOf(value, thelist)
   found = ref false
-  ignore(found)
 
   def f(index, item) =
     if item == value then
@@ -74,6 +73,7 @@ def list.indexOf(value, thelist)
   end
 
   index = list.fold(f, 0, thelist)
+
   if !found then
     index
   else
