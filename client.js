@@ -42,7 +42,7 @@ function Client(path){
     }
   });
 
-  socket.pipe(parser);
+  this.socket.pipe(parser);
 }
 
 module.exports = Client;
