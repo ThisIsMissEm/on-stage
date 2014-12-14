@@ -21,12 +21,17 @@ dyn_sources_names = ref []
 dyn_source_id = ref 0
 active_source = ref 0
 
-source_counter_int = ref 0
-def source_counter()
-  current = !source_counter_int
-  source_counter_int := !source_counter_int + 1
-  current
+
+def counter()
+  int = ref 0
+  def next()
+    current = !int
+    int := !int + 1
+    current
+  end
 end
+
+source_counter = counter()
 
 def add_dyn_source(~id, s)
   dyn_source_id := !dyn_source_id + 1
