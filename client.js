@@ -8,8 +8,11 @@ var socket = net.createConnection({
 }, function(){
   socket.write('count\r\n');
   socket.write('list_streams\r\n');
-
 });
+
+socket.setEncoding('ascii');
 
 var parser = new LineStream();
 socket.pipe(parser);
+
+parser.on('data', console.log)
