@@ -15,6 +15,8 @@ set("server.timeout",-1.0)
 
 set("harbor.bind_addr","0.0.0.0")
 set("harbor.reverse_dns", false)
+set("harbor.verbose", true)
+
 
 streams = ref []
 stream_names = ref []
