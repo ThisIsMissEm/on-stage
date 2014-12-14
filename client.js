@@ -41,13 +41,9 @@ function Client(path){
     var cb = client.callbacks.shift();
     var res = buffer.splice(0, buffer.length).join("");
 
-    console.log(">> ", cmd);
+    console.log(">> ", res);
 
-    if(cb && cb != noop){
-      cb(res);
-    }else{
-      console.log("UNHANDLED RES: ", res);
-    }
+    cb(res);
   });
 
   this.socket.pipe(parser);
