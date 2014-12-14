@@ -59,10 +59,10 @@ default = amplify(id="default", 0.00001, noise())
 ignore(add_stream(id="default", default))
 
 add_http("http://listen.ntslive.co.uk/stream")
-add_source("password 1")
-add_source("password 2")
-add_source("password 3")
-add_source("password 4")
+add_source("password1")
+add_source("password2")
+add_source("password3")
+add_source("password4")
 
 
 
