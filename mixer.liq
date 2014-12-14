@@ -59,25 +59,26 @@ add_source("s4", "testing")
 
 def list.indexOf(value, thelist)
   found = ref false
+  ignore(found)
 
-  def f(l,x) = 
-    if x == value then
+  def f(index, item) =
+    if item == value then
       found := true
     end
 
     if !found then
-      l
+      index
     else
-      l + 1
+      index + 1
     end
   end
 
   index = list.fold(f, 0, thelist)
-  ignore(found)
-
-  log(string_of(index))
-
-  index
+  if found then
+    index
+  else
+    -1
+  end
 end
 
 
