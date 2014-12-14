@@ -16,11 +16,9 @@ set("server.timeout",-1.0)
 set("harbor.bind_addr","0.0.0.0")
 set("harbor.reverse_dns", false)
 
-dyn_sources = ref []
-dyn_sources_names = ref []
-# dyn_source_id = ref 0
+streams = ref []
+stream_names = ref []
 active_source = ref 0
-
 
 def counter()
   int = ref 0
@@ -31,15 +29,12 @@ def counter()
   end
 end
 
-dyn_counter = counter()
 stream_counter = counter()
 source_counter = counter()
 
-def add_dyn_source(~id, s)
-  # dyn_source_id := !dyn_source_id + 1
-
-  dyn_sources := list.append(!dyn_sources, [ s ] )
-  dyn_sources_names := list.append(!dyn_sources_names, [ id ] )
+def add_stream(id, s)
+  streams := list.append(!streams, [ s ] )
+  stream_names := list.append(!stream_names, [ id ] )
 
   # make sure we read from `s`
   ignore(output.dummy(fallible=true, s))
@@ -48,26 +43,26 @@ end
 def add_stream(uri)
   ident = "stream#{stream_counter()}"
   httpstream = input.http(id=ident, autostart=true, uri)
-  ignore(add_dyn_source(id=ident, httpstream))
+  ignore(add_stream(id=ident, httpstream))
   ignore(ident)
 end
 
-def add_source(mount, password)
+def add_source(password)
   ident = "source#{source_counter()}"
-  harbor = input.harbor(id=ident, port=8080, password=password, mount)
-  ignore(add_dyn_source(id=ident, harbor))
+  harbor = input.harbor(id=ident, port=8080, password=password, ident)
+  ignore(add_stream(id=ident, harbor))
 end
 
 jingle = single(id="jingle", conservative=true, default_duration=7.0, length=7.0, "~/jingle.mp3")
 
 default = amplify(id="default", 0.00001, noise())
-ignore(add_dyn_source(id="default", default))
+ignore(add_stream(id="default", default))
 
 add_stream("http://listen.ntslive.co.uk/stream")
-add_source("s1", "testing")
-add_source("s2", "testing")
-add_source("s3", "testing")
-add_source("s4", "testing")
+add_source("password 1")
+add_source("password 2")
+add_source("password 3")
+add_source("password 4")
 
 
 
@@ -97,17 +92,17 @@ end
 
 
 def transition(name)
-  index = list.indexOf(name, !dyn_sources_names)
+  index = list.indexOf(name, !stream_names)
   log("Index of #{name} in sources is: #{index}")
 
   # # index = int_of_string(sInt)
-  # len = list.length(!dyn_sources)
+  # len = list.length(!streams)
 
   # if index >= 0 and index < len then
   if index >= 0 then
     log("switching to: #{index}")
 
-    id = list.nth(!dyn_sources_names, index)
+    id = list.nth(!stream_names, index)
     log("streams.select(#{index}) => #{id}")
     active_source := index
     json_of("done")
@@ -117,11 +112,11 @@ def transition(name)
 end
 
 def dyn_names(_)
-  json_of(!dyn_sources_names)
+  json_of(!stream_names)
 end
 
 def dyn_count(_)
-  json_of(list.length(!dyn_sources))
+  json_of(list.length(!streams))
 end
 
 
@@ -137,9 +132,9 @@ server.register("mute", mute)
 
 sfs = list.map(fun (source) -> begin
   (fun() -> begin
-    list.nth(!dyn_sources_names, !active_source) == source.id(source)
+    list.nth(!stream_names, !active_source) == source.id(source)
   end, source)
-end, !dyn_sources)
+end, !streams)
 
 
 def is_replay_metadata(stream)
