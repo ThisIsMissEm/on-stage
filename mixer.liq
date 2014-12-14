@@ -75,7 +75,7 @@ end
 
 def transition(name)
   index = list.indexOf(name, !dyn_sources_names)
-  log("#{name} found at index: #{index}"
+  log("#{name} found at index: #{index}")
 
   # index = int_of_string(sInt)
   len = list.length(!dyn_sources)
