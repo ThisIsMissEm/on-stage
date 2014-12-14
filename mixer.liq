@@ -74,7 +74,7 @@ def list.indexOf(value, thelist)
   end
 
   index = list.fold(f, 0, thelist)
-  if found then
+  if !found then
     index
   else
     -1
