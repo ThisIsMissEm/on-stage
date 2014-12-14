@@ -57,8 +57,8 @@ add_source("s4", "testing")
 
 
 
-def transition_to(s)
-  index = int_of_string(s)
+def transition(sInt)
+  index = int_of_string(sInt)
   len = list.length(!dyn_sources)
 
   if index >= 0 and index < len then
@@ -90,7 +90,7 @@ end
 
 server.register(description="Retrieve number of available streams", "count", dyn_count)
 server.register(description="Retrieve names of available streams", "list_streams", dyn_names)
-server.register(description="Select a stream.", "transition_to", transition_to)
+server.register(description="Select a stream.", "transition", transition)
 server.register("mute", mute)
 
 sfs = list.map(fun (source) -> begin
