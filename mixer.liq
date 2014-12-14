@@ -60,11 +60,11 @@ def list.indexOf(value, list)
   found = false
   index = 0
   list.iter(fun(cur) ->
-    if found == false
+    if found == false then
       index = index + 1
     end
 
-    if cur == value
+    if cur == value then
       found = true
     end
   )
