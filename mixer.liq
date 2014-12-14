@@ -79,7 +79,7 @@ def dyn_names(_)
 end
 
 def dyn_count(_)
-  json_of([ 'count', string_of(list.length(!dyn_sources)) ] )
+  json_of([ [ 'count' ], string_of(list.length(!dyn_sources)) ] )
 end
 
 
