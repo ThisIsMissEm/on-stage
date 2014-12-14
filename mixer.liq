@@ -108,8 +108,8 @@ def crossfade(a,b)
     ])
   elsif source.id(a) != "default" and source.id(b) == "default" then
     add(normalize=false, [
-      fade.final(a, duration=2.0),
-      sequence(merge=true, [ blank(duration=0.75), fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ])
+      fade.final(a, duration=2.0)
+      # sequence(merge=true, [ blank(duration=0.75), fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ])
     ])
   else
     add(normalize=false, [
