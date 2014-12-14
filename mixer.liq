@@ -105,18 +105,18 @@ def crossfade(a,b)
   log(json_of([source.id(a), source.id(b)]))
 
   if source.id(a) == "default" and source.id(b) != "default" then
-    add(normalize=false, [
+    add(id="add_in", normalize=false, [
       fade.initial(b)
       # sequence(merge=true, [ fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ]),
       # sequence(merge=true, [ blank(duration=3.75), fade.initial(b) ])
     ])
   elsif source.id(a) != "default" and source.id(b) == "default" then
-    add(normalize=false, [
+    add(id="add_out", normalize=false, [
       sequence(merge=true, [ fade.final(a, duration=2.0), default ])
       # sequence(merge=true, [ blank(duration=0.75), fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ])
     ])
   else
-    add(normalize=false, [
+    add(id="add_crossover",normalize=false, [
       fade.final(a, duration=2.0),
       sequence(merge=true, [ blank(duration=0.9), fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ]),
       sequence(merge=true, [ blank(duration=4.5), fade.initial(b) ])
