@@ -16,6 +16,15 @@ function makeCallback(maybe){
   }
 };
 
+function parseCb(data, callback){
+  try {
+    res = JSON.parse(res);
+    callback(null, res)
+  }catch(e){
+    callback(e);
+  }
+}
+
 function Client(path){
   var client = this;
 
@@ -41,9 +50,11 @@ function Client(path){
     var cb = client.callbacks.shift();
     var res = buffer.splice(0, buffer.length).join("");
 
-    console.log(">> ", res);
-
-    cb(res);
+    if(res.substr(0, 6) === "ERROR:"){
+      callback(new Error(res.slice(6)));
+    } else {
+      parseCb(res, callback)
+    }
   });
 
   this.socket.pipe(parser);
@@ -80,14 +91,7 @@ Client.prototype._send = function(cmd){
 };
 
 Client.prototype.list_streams = function(callback){
-  this._send("list_streams", function(res) {
-    try {
-      res = JSON.parse(res);
-      callback(null, res)
-    }catch(e){
-      callback(e)
-    }
-  });
+  this._send("list_streams", callback);
 };
 
 Client.prototype.count = function(callback){
