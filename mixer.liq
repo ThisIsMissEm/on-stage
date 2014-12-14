@@ -103,8 +103,9 @@ end, !dyn_sources)
 def crossfade(a,b)
   if source.id(a) == "default" and source.id(b) != "default" then
     add(normalize=false, [
-      sequence(merge=true, [ fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ]),
-      sequence(merge=true, [ blank(duration=3.75), fade.initial(b) ])
+      fade.initial(b)
+      # sequence(merge=true, [ fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ]),
+      # sequence(merge=true, [ blank(duration=3.75), fade.initial(b) ])
     ])
   elsif source.id(a) != "default" and source.id(b) == "default" then
     add(normalize=false, [
