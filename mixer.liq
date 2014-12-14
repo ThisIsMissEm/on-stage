@@ -153,20 +153,17 @@ def crossfade(a,b)
     add(id="add_replay", [ sequence(merge=true, [ fade.final(a), b ]) ])
   # Try to match further:
   elsif is_default(a) and not is_default(b) then
-    log("Add In s -> _ -> b")
+    log("Set: s => _ -> b")
     add(id="add_in", normalize=false, [
       fade.initial(b)
-      # sequence(merge=true, [ fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ]),
-      # sequence(merge=true, [ blank(duration=3.75), fade.initial(b) ])
     ])
   elsif is_default(b) and not is_default(a) then
-    log("Add In s -> a -> _")
+    log("Set: s => a -> _")
     add(id="add_out", normalize=false, [
       sequence(merge=true, [ fade.final(a, duration=2.0), default ])
-      # sequence(merge=true, [ blank(duration=0.75), fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ])
     ])
   else
-    log("Add In s -> a -> b")
+    log("Set: s => a -> jingle -> b")
     add(id="add_crossover",normalize=false, [
       fade.final(a, duration=2.0),
       sequence(merge=true, [ blank(duration=0.9), fade.initial(jingle, duration=0.6, type="log"), blank(duration=2.5) ]),
