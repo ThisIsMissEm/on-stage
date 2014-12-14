@@ -26,5 +26,5 @@ parser.on('data', function(data){
   buffer.push(data);
 });
 
-socket.queue('count\r\n');
-socket.queue('list_streams\r\n');
+socket.write('count\r\n');
+socket.write('list_streams\r\n');
