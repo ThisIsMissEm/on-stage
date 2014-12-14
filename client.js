@@ -45,6 +45,8 @@ function Client(path){
   socket.pipe(parser);
 }
 
+module.exports = Client;
+
 Client.prototype._flushQueue = function() {
   var data;
   while(this.queue.length && (data = this.queue.shift() )){
