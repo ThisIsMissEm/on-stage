@@ -4,7 +4,8 @@
   "description": "On Stage: Mixing your streams",
   "main": "client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "liquidsoap": "liquidsoap mixer.liq",
+    "client": "node client.js"
   },
   "author": "Micheil Smith <micheil@brandedcode.com>",
   "license": "MIT",
