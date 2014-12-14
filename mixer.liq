@@ -84,12 +84,13 @@ end
 
 def transition(name)
   index = list.indexOf(name, !dyn_sources_names)
-  log("#{name} found at index: #{index}")
+  log("Index of #{name} in sources is: #{index}")
 
-  # index = int_of_string(sInt)
-  len = list.length(!dyn_sources)
+  # # index = int_of_string(sInt)
+  # len = list.length(!dyn_sources)
 
-  if index >= 0 and index < len then
+  # if index >= 0 and index < len then
+  if index >= 0 then
     log("switching to: #{index}")
 
     id = list.nth(!dyn_sources_names, index)
