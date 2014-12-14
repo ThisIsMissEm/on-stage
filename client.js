@@ -5,9 +5,6 @@ var LineStream = require('byline').LineStream;
 // 1. Connect to liquid soap over socket
 var socket = net.createConnection({
   path: path.resolve(__dirname, "/tmp/liquidsoap-mixer")
-}, function(){
-  socket.write('count\r\n');
-  socket.write('list_streams\r\n');
 });
 
 socket.setEncoding('utf8');
@@ -25,4 +22,7 @@ parser.on('data', function(data){
   }
 
   buffer.push(data);
-})
+});
+
+socket.push('count\r\n');
+socket.push('list_streams\r\n');
