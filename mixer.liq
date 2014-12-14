@@ -59,7 +59,7 @@ add_source("s4", "testing")
 def list.indexOf(value, list)
   found = false
   index = 0
-  list.iter(fun(cur) -> begin
+  list.iter(fun(cur) ->
     if found == false
       index = index + 1
     end
@@ -67,7 +67,7 @@ def list.indexOf(value, list)
     if cur == value
       found = true
     end
-  end)
+  )
 
   index
 end
