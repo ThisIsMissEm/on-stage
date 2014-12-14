@@ -10,7 +10,7 @@ var socket = net.createConnection({
   socket.write('list_streams\r\n');
 });
 
-socket.setEncoding('ascii');
+socket.setEncoding('utf8');
 
 var parser = new LineStream();
 socket.pipe(parser);
