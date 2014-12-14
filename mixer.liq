@@ -34,19 +34,19 @@ end
 def add_stream(uri)
   ident = "s#{!dyn_source_id}_stream"
   httpstream = input.http(id=ident, autostart=true, uri)
-  ignore(add_dyn_source(id=ident, httpstream))
+  ignore(add_dyn_source(id=ident, drop_metadata(httpstream)))
   ignore(ident)
 end
 
 def add_source(mount, password)
   ident = "s#{!dyn_source_id}_source"
   harbor = input.harbor(id=ident, port=8080, password=password, mount)
-  ignore(add_dyn_source(id=ident, harbor))
+  ignore(add_dyn_source(id=ident, drop_metadata(harbor)))
 end
 
-jingle = single(id="jingle", conservative=true, default_duration=7.0, length=7.0, "~/jingle.mp3")
+jingle = drop_metadata(single(id="jingle", conservative=true, default_duration=7.0, length=7.0, "~/jingle.mp3"))
 
-default = amplify(id="default", 0.00001, noise())
+default = drop_metadata(amplify(id="default", 0.00001, noise()))
 ignore(add_dyn_source(id="default", default))
 
 add_stream("http://listen.ntslive.co.uk/stream")
