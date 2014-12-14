@@ -89,7 +89,7 @@ def mute(_)
 end
 
 server.register(description="Retrieve number of available streams", "count", dyn_count)
-server.register(description="Retrieve names of available streams", "names", dyn_names)
+server.register(description="Retrieve names of available streams", "list_streams", dyn_names)
 server.register(description="Select a stream.", "transition_to", transition_to)
 server.register("mute", mute)
 

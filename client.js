@@ -15,3 +15,4 @@ socket.pipe(parser);
 generator.pipe(socket);
 
 generator.write('count');
+generator.write('list_streams');
